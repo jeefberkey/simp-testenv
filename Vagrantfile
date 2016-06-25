@@ -2,10 +2,10 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |c|
-  c.ssh.insert_key = false
+  # c.ssh.insert_key = false
 
-  c.vm.define 'simp' do |v|
-    v.vm.hostname = 'simp.test.net'
+  c.vm.define 'server' do |v|
+    v.vm.hostname = 'server.test.net'
     v.vm.box = "simp-5.1.X-vagrant.box"
     v.vm.network "private_network",
       ip: "192.168.33.10",
@@ -15,6 +15,9 @@ Vagrant.configure("2") do |c|
     v.vm.provider "virtualbox" do |vb|
       vb.memory = "3072"
       vb.cpus = "2"
+    end
+    v.vm.provision "puppet" do |puppet|
+      puppet.manifest_file = '../bootstrap.pp'
     end
   end
 
