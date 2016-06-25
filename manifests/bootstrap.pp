@@ -2,13 +2,13 @@ $enable_named = true
 $enable_dhcp = true
 $enable_ks = true
 
-$rsync_path = '/var/lib/rsync/CentOS/7'
+$rsync_path = '/var/simp/rsync/CentOS/7'
 
 if $enable_dhcp {
   file { "$rsync_path/dhcpd/dhcpd.conf":
     ensure => file,
-    owner  => 'root'
-    group  => 'root'
+    owner  => 'root',
+    group  => 'root',
     mode   => '0640',
     source => 'file:///files/dhcpd.conf',
   }
@@ -17,11 +17,13 @@ if $enable_dhcp {
 if $enable_named {
   $bind_path = "$rsync_path/bind_dns/default/named"
   File {
-    ensure => file
-    mode   => '0640',
-    owner  => 'root',
-    group  => 'named',
+    ensure  => file,
+    mode    => '0640',
+    owner   => 'root',
+    group   => 'named',
+    require => Package['bind'],
   }
+  package { 'bind': ensure => latest }
   file { "$bind_path/etc/named.conf":
     source => 'file:///files/named.conf',
   }
