@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |c|
   # c.ssh.insert_key = false
 
-  c.vm.define 'server' do |v|
+  c.vm.define 'server', primary: true do |v|
     v.vm.hostname = 'puppet.test.net'
     v.vm.box = "simp-5.1.X-vagrant.box"
     v.vm.network "private_network",
@@ -18,15 +18,9 @@ Vagrant.configure("2") do |c|
       vb.memory = "3072"
       vb.cpus = "2"
     end
-    # `vagrant ssh server -- sudo su -c \'mount -o remount,exec,dev,suid /tmp\'`
-    #v.vm.provision "shell", path: "files/vagrant-inline.sh", upload_path: "/var/local/simp/vagrant-inline.sh"
-    #v.vm.provision "puppet" do |puppet|
-    #  puppet.manifest_file = './bootstrap.pp'
-    #end
-    #v.vm.provision "shell", path: "files/simp.sh", upload_path: "/var/local/simp/simp.sh"
   end
 
-  c.vm.define 'client' do |v|
+  c.vm.define 'client', autostart: false do |v|
     v.vm.box = "simp-5.1.X-client-vagrant.box"
     v.vm.hostname = "client.test.net"
     v.vm.network "forwarded_port", guest: 80, host: 8080
