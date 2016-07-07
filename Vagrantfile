@@ -53,6 +53,10 @@ EOS
       virtualbox__intnet: "test.net",
       virtualbox__dhcp_enabled: false,
       adapter: 2
+    v.ssh.insert_key = false
+    v.ssh.keys_only = false
+    v.ssh.username = 'vagrant'
+    v.ssh.password = 'vagrant'
     v.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.cpus = "2"
