@@ -7,6 +7,8 @@ Now run the following commands to get going:
   simp config -a /vagrant/simp_conf.yaml
   simp bootstrap
 
+You may way to run puppet an addtional few more times: `puppet agent -t`
+
 If you want to kickstart, run these commands:
   /usr/local/bin/unpack_dvd -d /var/www/yum /vagrant/CentOS-7-x86_64-DVD-1511.iso
   cd /etc/puppet/environments/simp/FakeCA
@@ -16,6 +18,7 @@ If you want to kickstart, run these commands:
 When pxebooting, press ctrl+b and type `autoboot` net1 to boot off of the second interface
 apache::conf::allowroot: "%{alias('client_nets')}"
 EOS
+
   client_post_up = <<EOS
 The root password is RootPassword, but you should be able to
 log in with vagrant:vagrant.
