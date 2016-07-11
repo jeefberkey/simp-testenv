@@ -7,7 +7,7 @@ Now run the following commands to get going:
   simp config -a /vagrant/simp_conf.yaml
   simp bootstrap
 
-You may way to run puppet an addtional few more times: `puppet agent -t`
+You may want to run puppet an addtional few more times: `puppet agent -t`
 
 If you want to kickstart, run these commands:
   /usr/local/bin/unpack_dvd -d /var/www/yum /vagrant/CentOS-7-x86_64-DVD-1511.iso
