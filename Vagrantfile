@@ -4,6 +4,7 @@
 Vagrant.configure("2") do |c|
   server_post_up = <<EOS
 Now run the following commands to get going:
+  ldapadd -Z -x -W -D "cn=LDAPAdmin,ou=People,dc=test,dc=net" -f /var/local/simp/files/add_user_with_password.ldif
   simp config -a /vagrant/simp_conf.yaml
   simp bootstrap
 
@@ -37,6 +38,7 @@ EOS
       virtualbox__dhcp_enabled: false
     v.ssh.username = 'vagrant'
     v.ssh.password = 'vagrant'
+    v.ssh.private_key_path = 'vagrant-key'
     v.vm.provider "virtualbox" do |vb|
       vb.memory = "3072"
       vb.cpus = "2"
@@ -53,8 +55,7 @@ EOS
       virtualbox__intnet: "test.net",
       virtualbox__dhcp_enabled: false,
       adapter: 2
-    v.ssh.insert_key = false
-    v.ssh.keys_only = false
+    v.ssh.private_key_path = 'vagrant-key'
     v.ssh.username = 'vagrant'
     v.ssh.password = 'vagrant'
     v.vm.provider "virtualbox" do |vb|
