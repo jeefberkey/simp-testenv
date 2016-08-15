@@ -83,7 +83,7 @@ gateway: "10.0.2.2"
 # you can override it in Hiera.
 client_nets:
   - "10.0.2.0/24"
-  - "192.168.33.10/24"
+  - "192.168.33.10/16"
 
 # === ntpd::servers ===
 # Your network's NTP time servers.
