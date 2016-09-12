@@ -61,12 +61,14 @@ Vagrant.configure('2') do |c|
     v.vm.provider 'virtualbox' do |vb|
       vb.memory = '1024'
       vb.cpus   = '2'
-      vb.gui    = true
+      vb.customize ['modifyvm', :id, '--nicbootprio1', '0']
+      vb.customize ['modifyvm', :id, '--nicbootprio2', '1']
       vb.customize ['modifyvm', :id, '--boot1', 'disk']
       vb.customize ['modifyvm', :id, '--boot2', 'net']
     end
     v.vm.post_up_message = client_post_up
     v.vm.boot_timeout    = 1260
+    v.vm.synced_folder '.', '/vagrant', disabled: true
 
     # The username and password are only needed for pre-bootstrap operations.
     v.ssh.username         = 'vagrant'
