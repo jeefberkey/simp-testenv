@@ -5,7 +5,7 @@ Vagrant.configure('2') do |c|
   server_post_up = <<-EOS.gsub(/^[[:blank:]]{4}/, '')
     Now run the following commands to get going:
 
-        simp config -a /vagrant/answers.yaml
+        simp config -a /vagrant/simp_config_answers.yaml
         simp bootstrap
         ldapadd -Z -x -D 'cn=LDAPAdmin,ou=People,dc=simp,dc=test' -w 'NjUfdMTAKUMRdNNDXcfTVvrKJTgY8uZQ' -f /var/local/simp/files/add_user_with_password.ldif
 
